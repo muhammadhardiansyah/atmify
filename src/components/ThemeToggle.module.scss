@@ -1,0 +1,31 @@
+@use '@/styles/variables.scss' as *;
+
+.toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg);
+    background-color: var(--input-bg);
+    border: 1.5px solid var(--input-border);
+    color: var(--primary-text);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: 0;
+    font-size: 1.125rem;
+
+    &:hover {
+        background-color: var(--hover-bg);
+        border-color: var(--brand-primary);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.icon {
+    display: block;
+    line-height: 1;
+}

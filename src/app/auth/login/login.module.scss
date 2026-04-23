@@ -1,37 +1,100 @@
-@import '../../../styles/variables.scss';
+@use '@/styles/variables.scss' as *;
 
-.container {
+.pageWrapper {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    padding: var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(225, 29, 72, 0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: -5%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(15, 23, 42, 0.05) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(20px);
+        }
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    z-index: 10;
 }
 
 .card {
-    width: 100%;
-    max-width: 28rem;
     background-color: var(--card-bg);
     border-radius: var(--radius-2xl);
     box-shadow: var(--shadow-2xl);
     padding: var(--spacing-2xl);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
 }
 
 .header {
     text-align: center;
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.logoWrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-accent) 100%);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-lg);
+}
+
+.logo {
+    font-size: 1.5rem;
 }
 
 .title {
-    font-size: 1.875rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-text);
+    margin-bottom: var(--spacing-xs);
 }
 
 .subtitle {
     font-size: 0.875rem;
     color: var(--secondary-text);
-    margin-top: var(--spacing-md);
+    line-height: 1.4;
 }
 
 .form {
@@ -43,22 +106,41 @@
 .formGroup {
     display: flex;
     flex-direction: column;
+    gap: var(--spacing-sm);
 }
 
 .label {
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.8125rem;
+    font-weight: 600;
     color: var(--primary-text);
-    margin-bottom: var(--spacing-sm);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.inputIcon {
+    position: absolute;
+    left: var(--spacing-md);
+    color: var(--secondary-text);
+    font-size: 0.875rem;
+    pointer-events: none;
+    transition: color var(--transition-fast);
 }
 
 .input {
-    padding: var(--spacing-md);
-    border: 1px solid var(--input-border);
+    width: 100%;
+    padding: 0.625rem var(--spacing-md) 0.625rem 2.5rem;
+    border: 1.5px solid var(--input-border);
     border-radius: var(--radius-lg);
     background-color: var(--input-bg);
     color: var(--primary-text);
-    font-size: 1rem;
+    font-size: 0.9375rem;
+    font-family: var(--font-family);
     transition: all var(--transition-fast);
 
     &::placeholder {
@@ -67,38 +149,82 @@
 
     &:focus {
         outline: none;
-        ring: 2px var(--brand-primary);
         border-color: var(--brand-primary);
+        box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.08);
+
+        &~.inputIcon {
+            color: var(--brand-primary);
+        }
+    }
+
+    &:hover {
+        border-color: var(--secondary-text);
+    }
+}
+
+.passwordToggle {
+    position: absolute;
+    right: var(--spacing-md);
+    background: none;
+    border: none;
+    color: var(--secondary-text);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: color var(--transition-fast);
+    padding: 0;
+
+    &:hover {
+        color: var(--brand-primary);
     }
 }
 
 .errorMessage {
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
     background-color: var(--error-bg);
     border: 1px solid var(--error-border);
     border-radius: var(--radius-lg);
     color: var(--error-text);
+    font-size: 0.8125rem;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    line-height: 1.4;
+}
+
+.errorIcon {
+    flex-shrink: 0;
     font-size: 0.875rem;
 }
 
 .submitButton {
     width: 100%;
-    padding: var(--spacing-md);
-    background-color: var(--brand-primary);
-    color: var(--primary-bg);
+    padding: 0.75rem var(--spacing-lg);
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-accent) 100%);
+    color: white;
     font-weight: 600;
+    font-size: 0.9375rem;
     border-radius: var(--radius-lg);
     border: none;
     cursor: pointer;
     transition: all var(--transition-fast);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
 
     &:hover:not(:disabled) {
-        background-color: var(--brand-accent);
+        transform: translateY(-1px);
         box-shadow: var(--shadow-lg);
     }
 
+    &:active:not(:disabled) {
+        transform: translateY(0px);
+    }
+
     &:disabled {
-        opacity: 0.5;
+        opacity: 0.6;
         cursor: not-allowed;
     }
 }
@@ -107,14 +233,19 @@
     text-align: center;
     font-size: 0.875rem;
     color: var(--secondary-text);
-    margin-top: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
 }
 
-.link {
-    color: var(--brand-primary);
+.footerLink {
+    color: var(--brand-accent);
     font-weight: 600;
+    text-decoration: none;
+    transition: color var(--transition-fast);
 
     &:hover {
+        color: var(--brand-primary);
         text-decoration: underline;
     }
 }

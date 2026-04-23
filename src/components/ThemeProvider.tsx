@@ -10,14 +10,15 @@ export default function ThemeProvider({
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
-        setMounted(true)
-
-        // Get theme from localStorage or system preference
-        const savedTheme = localStorage.getItem('theme')
+        // Apply theme on mount
+        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
         const theme = savedTheme || (prefersDark ? 'dark' : 'light')
 
-        document.documentElement.setAttribute('data-theme', theme)
+        const htmlElement = document.documentElement
+        htmlElement.setAttribute('data-theme', theme)
+
+        setMounted(true)
     }, [])
 
     if (!mounted) return <>{children}</>

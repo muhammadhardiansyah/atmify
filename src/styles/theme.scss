@@ -1,4 +1,26 @@
-// Dark mode - GLOBAL STYLES ONLY (not in modules)
+// Light theme (default)
+:root,
+[data-theme='light'] {
+    --primary-bg: #ffffff;
+    --primary-text: #0f172a;
+    --secondary-text: #64748b;
+    --tertiary-text: #94a3b8;
+    --border-color: #e2e8f0;
+    --card-bg: #f8fafc;
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --input-placeholder: #94a3b8;
+    --hover-bg: #f1f5f9;
+    --error-bg: #fef2f2;
+    --error-text: #991b1b;
+    --error-border: #fecaca;
+    --success-bg: #f0fdf4;
+    --success-text: #166534;
+    --gradient-start: #0f172a;
+    --gradient-end: #1e293b;
+}
+
+// Dark theme
 [data-theme='dark'] {
     --primary-bg: #0f1117;
     --primary-text: #e6edf3;

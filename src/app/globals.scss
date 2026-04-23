@@ -1,5 +1,5 @@
-@import '@/styles/variables.scss';
-@import '@/styles/theme.scss';
+@import '../styles/variables.scss';
+@import '../styles/theme.scss';
 
 // ============================================
 // GLOBAL STYLES
@@ -14,6 +14,10 @@
 html {
   font-family: var(--font-family);
   color-scheme: light;
+  
+  &[data-theme='dark'] {
+    color-scheme: dark;
+  }
 }
 
 body {
@@ -27,12 +31,7 @@ body {
 // TYPOGRAPHY
 // ============================================
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-display);
   font-weight: 700;
 }
@@ -98,11 +97,3 @@ button {
     cursor: not-allowed;
   }
 }
-
-// ============================================
-// TAILWIND DIRECTIVES
-// ============================================
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
